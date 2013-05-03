@@ -1,0 +1,8 @@
+install.packages("devtools")
+#install.packages('shiny')
+require(devtools)
+install_github("rCharts","ramnathv")
+require(rCharts)
+options(RCHART_WIDTH = 600, RCHART_HEIGHT = 400)
+knitr::opts_chunk$set(comment = NA, results = "asis", tidy = F, message = F)
+open_notebook()

@@ -1,0 +1,2 @@
+library(tm)
+vignette("tm")

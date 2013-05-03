@@ -1,0 +1,11 @@
+year<-1995:2005
+x1<-data.frame(year,GDP=sort(rnorm(11,1000,100)))
+x2<-data.frame(year,UR=rnorm(11,5,1))
+par(mar=c(5,4,4,6)+0.1)
+plot(x1,axes=FALSE,type="l")
+axis(1,at=year,label=year)
+axis(2)
+par(new=T,mar=c(10,4,10,6)+0.1)
+plot(x2,axes=FALSE,xlab="",ylab="",col="red",type="b")
+mtext("UR(%)",4,3,col="red")
+axis(4,col="red",col.axis="red")
