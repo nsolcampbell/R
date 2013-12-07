@@ -1,9 +1,9 @@
 data_outline<-function(x){
-    n <- length(x)#数据长度
-	m <- mean(x) #均值
-	v <- var(x) #方差
-	s <- sd(x) #标准差
-	me <- median(x) #中位数
+    n <- length(x)
+	m <- mean(x)
+	v <- var(x)
+	s <- sd(x)
+	me <- median(x)
 	cv <- 100*s/m
 	css <- sum((x-m)^2)
 	uss <- sum(x^2)

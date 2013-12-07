@@ -86,13 +86,13 @@ plot.GM1.1 <- function(mod,adv=5){
         prex[k] <- GM(x,k)$predict    
     }
  
-    value = c(x,prex)
+    number = c(x,prex)
  
-    res <- data.frame(index = 1:length(value),
-                      value = value,
+    res <- data.frame(year = 1:length(number),
+                      number = number,
                       type = factor(c(rep(1,length(x)),rep(2,length(prex)))))
     library(ggplot2)
-    p <- ggplot(res,aes(x=index,y= value))
+    p <- ggplot(res,aes(x=year,y= number))
     p + geom_point(aes(color=type),size=3)+ 
         geom_path(linetype=2) +
         theme_bw()
@@ -100,9 +100,25 @@ plot.GM1.1 <- function(mod,adv=5){
  
  
 # 原始数据
-x = c(26.7,31.5,32.8,34.1,35.8,37.5)
- 
+x = c(18.4,17.2,16.8,19.8,23.1,56.8,59.0,59.8,53.9,53.8,54.5,57.1,60.8,63.2,180.8,181.7,154.5,154.1,157.4,256.1,262.8,286.9,307.6,329.8,357.3,403.4,462.7,541.1,614.2,704.7,742.2)
+#x = c(382.7) #男
+#x = c() #女
 # 预测第7项
 res <- GM(x,1)
 print(res)
-plot(res,3)
+plot(res,5)
+
+x = c(256.1,262.8,286.9,307.6,329.8,357.3,403.4,462.7,541.1,614.2,704.7,742.2)
+#x = c(382.7) #男
+#x = c() #女
+# 预测第7项
+res <- GM(x,1)
+print(res)
+plot(res,5)
+
+#选用数据
+x=c( 181.7 154.5 154.1 157.4 256.1 262.8 286.9 307.6 329.8 357.3 403.4 462.7 541.1 614.2 704.7 742.2)
+res<-GM(x,1)
+print(res)
+print(res)
+plot(res,5)

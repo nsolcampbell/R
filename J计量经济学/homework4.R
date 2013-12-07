@@ -1,0 +1,15 @@
+#计量经济学第四次作业
+setwd('C:\\Users\\Danny\\Desktop')
+data<-read.csv('a.csv')
+attach(data)
+head(data)
+sr<-ts(sr,start=c(1992,1),frequency=12)
+zc<-ts(zc,start=c(1992,1),frequency=12)
+library(ggplot2)
+qplot(date,sr,geom_line())
+yrng<-range(sr)
+srplot<-qplot(date,sr,data=data,geom="line",xlab="")
+srplot
+p<-ggplot(sr,aes(color=cut))
+p<-p+layer(geom='point')
+p

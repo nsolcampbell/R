@@ -1,14 +1,14 @@
-
+install.packages("Rweibo", repos = "http://R-Forge.R-project.org")
 require(Rweibo)
-#æ³¨å†ŒregisterApp(app_name = "nsolcampbell", "2235573555", "652dbf2c9c0f1c301921ad9b80d120f0") #æ³¨å†ŒRä¸­çš„app
-roauth <- createOAuth(app_name = "nsolcampbell", access_name = "nsol") #åœ¨è¿™é‡Œè½¬åˆ°å¾®åšè®¤è¯
-res <- web.search.content("ä¸­å¤®è´¢ç»å¤§å­¦", page = 50, sleepmean = 10, sleepsd = 1)$Weibo
+#×¢²áregisterApp(app_name = "nsolcampbell", "2235573555", "652dbf2c9c0f1c301921ad9b80d120f0") #×¢²áRÖÐµÄapp
+roauth <- createOAuth(app_name = "nsolcampbell", access_name = "nsol") #ÔÚÕâÀï×ªµ½Î¢²©ÈÏÖ¤
+res <- web.search.content("ÖÐÑë²Æ¾­´óÑ§", page = 50, sleepmean = 10, sleepsd = 1)$Weibo
 
-#å°†å¾—åˆ°æ•°æ®å†™å…¥txtæ–‡ä»¶ï¼šwrite.table(res,"C:/Users/nixujun/Desktop/z.txt",row.name=F)
-#è¯»å–å¾®åšæœç´¢æ•°æ®ï¼šres<-read.table("C:\\Users\\nixujun\\Desktop\\z.txt",header=F)
+#½«µÃµ½Êý¾ÝÐ´ÈëtxtÎÄ¼þ£ºwrite.table(res,"C:/Users/nixujun/Desktop/z.txt",row.name=F)
+#¶ÁÈ¡Î¢²©ËÑË÷Êý¾Ý£ºres<-read.table("C:\\Users\\nixujun\\Desktop\\z.txt",header=F)
 
 require(Rwordseg)
-insertWords("ä¸­å¤®è´¢ç»å¤§å­¦")
+insertWords("ÖÐÑë²Æ¾­´óÑ§")
 n = length(res[, 1])
 res = res[res!=" "]
 words = unlist(lapply(X = res, FUN = segmentCN))

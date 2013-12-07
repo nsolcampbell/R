@@ -1,0 +1,60 @@
+#检验白噪声
+names(mydata)<-c('year','month','day','jj','hh','mm)
+Box.test(mydata$jj)
+Box.test(mydata$hh)
+Box.test(mydata$mm)
+newdata<-subset(mydata,!hh==-1)
+newdata
+tsjj<-ts(newdata$jj,frequency=365,start=c(1990,1,1))
+Box.test(newdata$jj)
+Box.test(newdata$hh)
+Box.test(newdata$mm)
+plot.ts(newdata$jj)
+plot.ts(newdata$hh)
+plot.ts(newdata$mm)
+win.graph(width=4.875,height=3,pointsize=8)
+#识别模型类型
+acf(newdata$jj)#做自相关函数
+pacf(newdata$jj)#偏自相关函数 5阶截尾 AR（5）
+plot.ts(log(tsjj))
+acf(tsjj)
+pacf(tsjj)
+
+#question2
+#MA模型
+E<-ts(rnorm(400))
+b1<-0.3
+b2<-0.4
+Y<-ts(E-b1*lag(E)-b2*lag(E,2))
+plot(Y)
+acf(Y)
+#MA(2)模型 用MA(1)拟合
+model1=arima(Y,order=c(0,0,1))
+#MA(2)模型 用MA(2)拟合
+model2=arima(Y,order=c(0,0,2))
+#MA(2)模型 用MA(3)拟合
+model3=arima(Y,order=c(0,0,3))
+
+#AR模型
+E<-ts(rnorm(400))
+b1<-0.3
+b2<-0.4
+Y<-ts(E-b1*lag(E)-b2*lag(E,2))
+plot(Y)
+acf(Y)
+#MA(2)模型 用MA(1)拟合
+model1=arima(Y,order=c(0,0,1))
+#MA(2)模型 用MA(2)拟合
+model2=arima(Y,order=c(0,0,2))
+#MA(2)模型 用MA(3)拟合
+model3=arima(Y,order=c(0,0,3))
+
+
+
+
+
+
+
+
+
+
