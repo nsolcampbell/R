@@ -1,6 +1,6 @@
-
 setwd('/Users/nsol/Dropbox/手头工作/论文/DATA')
 library(Hmisc)
+library(reshape)
 #家庭收入的数据
 load('c12hhinc.rdata')
 #attach(c12hhinc)
@@ -11,7 +11,7 @@ head(c12hhinc)
 
 #关于分位数回归
 #install.packages('quantreg')
-library(quantreg)
+#library(quantreg)
 
 #library(Hmisc)
 #data1<-read.csv('1.csv')
@@ -47,7 +47,6 @@ head(educdata)
 abc<-data.frame(educdata$hhid,educdata$wave,educdata$age)
 abc
 head(abc)
-library(reshape)
 md<-melt(abc,id=c('educdata.hhid','educdata.wave'))
 md1<-cast(md,educdata.hhid~educdata.wave,mean)
 head(md1)
@@ -97,6 +96,18 @@ lao.1989.you<-na.omit(lao.1989.you)
 #得到家庭id
 #union(lao.2011.you,xiao.2011.you)
 goodid.2011<-intersect(lao.2011.you$laomd1.educdata.hhid,xiao.2011.you$xiaomd1.educdata.hhid)
+goodid.2000<-intersect(lao.2000.you$laomd1.educdata.hhid,xiao.2000.you$xiaomd1.educdata.hhid)
+goodid.1989<-intersect(lao.1989.you$laomd1.educdata.hhid,xiao.1989.you$xiaomd1.educdata.hhid)
+
+#goodid<-goodid.2011
+
+#wentiid<-goodid[which(is.na(chuvalue)==T)]
+#wentiid
+
+#intersect(xiaomd1$educdata.hhid,laomd1$educdata.hhid)
+#goodid<-intersect(xiaomd1$educdata.hhid,laomd1$educdata.hhid)
+#head(goodid)
+
 #for2011年
 chuid.2011<-c()
 chuvalue.2011<-c()
@@ -105,15 +116,10 @@ for (i in goodid.2011)
  chuid.2011<-append(chuid.2011,i)
  chuvalue.2011<-append(chuvalue.2011,chuchu)}
 chuvalue.2011
-chuid.2011
 library(Hmisc)
 describe(chuvalue.2011)
-describe(chuid.2011)
-describe(goodid.2011)
-describe(laomd1)
 
 #for2000年
-goodid.2000<-intersect(lao.2000.you$laomd1.educdata.hhid,xiao.2000.you$xiaomd1.educdata.hhid)
 chuid.2000<-c()
 chuvalue.2000<-c()
 for (i in goodid.2000)
@@ -122,23 +128,13 @@ for (i in goodid.2000)
  chuvalue.2000<-append(chuvalue.2000,chuchu)}
 library(Hmisc)
 describe(chuvalue.2000)
-describe(chuid.2000)
 chuvalue.2000
 #which(is.na(chuvalue.2000)==T)
 #chuid.2000[1]
 #head(laomd1)
 #laomd1$'2000'[laomd1$educdata.hhid==211101003]
 
-
-
 #for1989年
-goodid.1989<-intersect(lao.1989.you$laomd1.educdata.hhid,xiao.1989.you$xiaomd1.educdata.hhid)
-#goodid<-goodid.2011
-#wentiid<-goodid[which(is.na(chuvalue)==T)]
-#wentiid
-#intersect(xiaomd1$educdata.hhid,laomd1$educdata.hhid)
-#goodid<-intersect(xiaomd1$educdata.hhid,laomd1$educdata.hhid)
-#head(goodid)
 chuid.1989<-c()
 chuvalue.1989<-c()
 for (i in goodid.1989)
@@ -147,7 +143,6 @@ for (i in goodid.1989)
  chuvalue.1989<-append(chuvalue.1989,chuchu)}
 library(Hmisc)
 describe(chuvalue.1989)
-describe(chuid.1989)
 chuvalue.1989
 
 #setdiff(A,B) 返回A 中有但B 中没有的元素
@@ -179,13 +174,12 @@ final.2011.id<-c()
 final.2011.value<-c()
 final.2011.id<-append(final.2011.id,chuid.2011)
 final.2011.value<-append(final.2011.value,chuvalue.2011)
-for (i in xiao.y.lao.my.2011)
+for (i in xiao.y.lao.my.2000)
 {final.2011.id<-append(final.2011.id,i)
  final.2011.value<-append(final.2011.value,1)}
-for (i in lao.y.xiao.my.2011)
+for (i in lao.y.xiao.my.2000)
 {final.2011.id<-append(final.2011.id,i)
  final.2011.value<-append(final.2011.value,15)}
-describe(final.2011.id)
 length(final.2011.id)
 length(final.2011.value)
 
@@ -194,14 +188,13 @@ final.2000.id<-c()
 final.2000.value<-c()
 final.2000.id<-append(final.2000.id,chuid.2000)
 final.2000.value<-append(final.2000.value,chuvalue.2000)
-for (i in xiao.y.lao.my.2000)
+for (i in xiao.y.lao.my)
 {final.2000.id<-append(final.2000.id,i)
  final.2000.value<-append(final.2000.value,1)}
-for (i in lao.y.xiao.my.2000)
+for (i in lao.y.xiao.my)
 {final.2000.id<-append(final.2000.id,i)
  final.2000.value<-append(final.2000.value,15)}
 
-describe(final.2000.id)
 length(final.2000.id)
 length(final.2000.value)
 
@@ -210,15 +203,12 @@ final.1989.id<-c()
 final.1989.value<-c()
 final.1989.id<-append(final.1989.id,chuid.1989)
 final.1989.value<-append(final.1989.value,chuvalue.1989)
-for (i in xiao.y.lao.my.1989)
+for (i in xiao.y.lao.my)
 {final.1989.id<-append(final.1989.id,i)
  final.1989.value<-append(final.1989.value,1)}
-for (i in lao.y.xiao.my.1989)
+for (i in lao.y.xiao.my)
 {final.1989.id<-append(final.1989.id,i)
  final.1989.value<-append(final.1989.value,15)}
 describe(final.1989.value)
 length(final.1989.id)
 length(final.1989.value)
-
-#关于年龄已经结束
-
